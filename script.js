@@ -15,6 +15,15 @@ $(document).ready(function() {
         getWeather(weatherSearch)
     })
 
+    // Event handler for if the user hits enter after entering the city search term
+    $("#city-input").keypress(function(e){
+    if(e.which == 13){
+        $("#citySearchBtn").click();
+        }
+    });
+
+    
+
     var getWeather = function(city) {
         // format the github api url
         var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=5a03c4b84b5e9bfac4ce287b162bcdec";
