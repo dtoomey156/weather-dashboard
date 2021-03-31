@@ -1,46 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
+<head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="./style.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Varela+Round&display=swap" rel="stylesheet">
     <script type="module" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule="" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Montserrat|Varela+Round&display=swap" rel="stylesheet">
-    <title>Weather Dashboard</title>
 </head>
 <body>
-    <!--weather dashboard header-->
+    
+    <!-- Weather Dashboard Header -->
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
             <h1 class="display-5 text-center">Weather Dashboard</h1>
         </div>
     </div>
-    <!--main content container-->
-    <div class="container-fluid"></div>
-    <!--main content row-->
-    <div class="row">
-        <!--city search input column-->
-        <div class="col-3 searchCol">
-            <!--search form with button-->
-            <h4>Search for a city:</h4>
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" id="cityInput" placeholder="City Name" aria-label="Recipient's username" aria-describedby="button-addon2">
-                <div class="input-group-append">
-                    <button id ="add-city" class="btn btn-outline-secondary bg-primary" type="button"><ion-icon name="search-outline"></ion-icon> </button>
+    
+    <!-- Main Content Container -->
+    <div class="container-fluid">
+        <!-- Main Content Row -->
+        <div class="row">
+            <!-- City Search Bar -->
+            <div class="col-3 searchCol">
+                <!-- Search Form with Button -->
+                <h4>Search for a city:</h4>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="city-input" placeholder="City Name" aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-primary" type="button" id="citySearchBtn">
+                            <ion-icon name="search-outline"></ion-icon></button>
+                        </div>
+                    </div>
+                    <!-- City Table List -->
+                    <div class="list-group" id="cityList">
+                      </div>                    
                 </div>
-            </div>
-            <!--City list-->
-            <div class="list-group" id="city-list">
-
-            </div>
-            <!--Weather information column-->
-            <div class="col-9">
-                <div class="card" style="width: 100%" id="weather-container"></div>
-                <div id="5dayForecast"></div>
-            </div>
+                <!-- Weather Information Column -->
+                <div class="col-9">
+                    <div style="width: 100%;" id="weatherContainer"></div>
+                      <div id="forecastContainer"></div>
+                </div>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
