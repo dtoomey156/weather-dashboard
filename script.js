@@ -15,17 +15,17 @@ $(document).ready(function() {
         getWeather(weatherSearch)
     })
 
-    // Event handler for if the user hits enter after entering the city search term
-    $("#city-input").keypress(function(e){
-    if(e.which == 13){
-        $("#citySearchBtn").click();
-        }
-    });
+        // Event handler for if the user hits enter after entering the city search term
+        $("#city-input").keypress(function(e){
+        if(e.which == 13){
+            $("#citySearchBtn").click();
+            }
+        });
 
     
-
+        //this function runs the Open Weather API call displaying the current city, current weather, and five day forecast
     var getWeather = function(city) {
-        // format the github api url
+        
         var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=5a03c4b84b5e9bfac4ce287b162bcdec";
     
         //make a request to the url
@@ -45,15 +45,34 @@ $(document).ready(function() {
                 currentWeatherDiv.append(currentCityEl);
                 //var cityName = $("<h3>").addClass("card-body").text(data.name)
                 //var temp = $("<p>").addClass("card-text").text(data.main.temp)
-
-                
                 //currentWeatherDiv.append(city)
                 //currentWeatherDiv.append(temp)
+                var getTemp = data.main.temp.toFixed(1);
+                var tempEl = $("<p class='card-text'>").text("Temperature: "+getTemp+"° F");
+                currentWeatherDiv.append(tempEl);
+                var getHumidity = data.main.humidity;
+                var humidityEl = $("<p class='card-text'>").text("Humidity: "+getHumidity+"%");
+                currentWeatherDiv.append(humidityEl);
+                var getWindSpeed = data.wind.speed.toFixed(1);
+                var windSpeedEl = $("<p class='card-text'>").text("Wind Speed: "+getWindSpeed+" mph");
+                currentWeatherDiv.append(windSpeedEl);
+                var getLong = data.coord.lon;
+                var getLat = data.coord.lat;
 
+                //make a request to url
 
+                var uvUrl = "https://api.openweathermap.org/data/2.5/uvi?appid=5a03c4b84b5e9bfac4ce287b162bcdec&lat="+getLat+"&lon="+getLong;
+                    fetch(uvUrl).then(function(response) {
+                        response.json().then(function(uvData) {
+                            console.log(uvData);
+                        })
+                    })
+                
 
                 
-                // TODO add additional items in the weather container before appending the weatherContainer    
+
+                
+                  
 
 
                 $("#weatherContainer").append(currentWeatherDiv)
