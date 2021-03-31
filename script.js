@@ -3,7 +3,7 @@
 
 $(document).ready(function() {
 
-// jquery to store the city-input field to a variable on a button click
+    // jquery to store the city-input field to a variable on a button click
 
     $("#citySearchBtn").on("click", function() {
         var weatherSearch = $("#city-input").val()
@@ -26,18 +26,29 @@ $(document).ready(function() {
 
     var getWeather = function(city) {
         // format the github api url
-        var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=5a03c4b84b5e9bfac4ce287b162bcdec";
+        var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=5a03c4b84b5e9bfac4ce287b162bcdec";
     
         //make a request to the url
         fetch(apiUrl).then(function(response) {
             response.json().then(function(data) {
                 console.log(data);
-                $("#weatherContainer").empty()
-                var currentWeather = $("<div>").addClass("card-body")
-                var cityName = $("<h3>").addClass("card-body").text(data.name)
-                currentWeather.append(cityName)
-                var temp = $("<p>").addClass("card-text").text(data.main.temp)
-                currentWeather.append(temp)
+                //$("#weatherContainer").empty()
+                var currentWeatherDiv = $("<div class='card-body' id='currentWeather'>");
+                var city = data.name;
+                var date = new Date();
+                var val=(date.getMonth()+1)+"/"+date.getDate()+"/"+date.getFullYear();
+                var getCurrentWeatherIcon = data.weather[0].icon;
+                //var currentWeatherDiv = $("<div>").addClass("card-body")
+                var displayCurrentWeatherIcon = $("<img src = http://openweathermap.org/img/wn/" + getCurrentWeatherIcon + "@2x.png />");
+                var currentCityEl = $("<h3 class = 'card-body'>").text(city+" ("+val+")");
+                currentCityEl.append(displayCurrentWeatherIcon);
+                currentWeatherDiv.append(currentCityEl);
+                //var cityName = $("<h3>").addClass("card-body").text(data.name)
+                //var temp = $("<p>").addClass("card-text").text(data.main.temp)
+
+                
+                //currentWeatherDiv.append(city)
+                //currentWeatherDiv.append(temp)
 
 
 
@@ -45,7 +56,7 @@ $(document).ready(function() {
                 // TODO add additional items in the weather container before appending the weatherContainer    
 
 
-                $("#weatherContainer").append(currentWeather)
+                $("#weatherContainer").append(currentWeatherDiv)
             });
         });
     };
