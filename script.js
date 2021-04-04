@@ -88,6 +88,15 @@ $(document).ready(function () {
                     })
                 })
 
+                var fiveDayForecast = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial&appid=5a03c4b84b5e9bfac4ce287b162bcdec";
+                fetch(fiveDayForecast).then(function (fiveDayResponse) {
+                    fiveDayResponse.json().then(function (fiveDayData) {
+                        console.log(fiveDayData)
+                    })
+                })
+
+            
+
 
 
                 $("#weatherContainer").append(currentWeatherDiv)
