@@ -88,10 +88,47 @@ $(document).ready(function () {
                     })
                 })
 
+                // five day forecast api call variable
+
                 var fiveDayForecast = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial&appid=5a03c4b84b5e9bfac4ce287b162bcdec";
                 fetch(fiveDayForecast).then(function (fiveDayResponse) {
                     fiveDayResponse.json().then(function (fiveDayData) {
                         console.log(fiveDayData)
+
+                        // create forecast div
+
+                        var forecastDiv = $("<div id='fiveDayForecast'>");
+                        var forecastHeader = $("<h5 class='card-header border-secondary'>").text("5 Day Forecast");
+                        forecastDiv.append(forecastHeader);
+                        var cardDeck = $("<div class='card-deck'>");
+                        forecastHeader.append(cardDeck);
+
+                        // loop through five array results to grab info and append to cards
+
+                        for (i=0; i<5; i++) {
+                            var forecastCard = $("<div class='card mb-3 mt-3'>");
+                            var cardBody = $("<div class='card-body'>");
+                            var date = new Date();
+                            var value = (date.getMonth()+1)+"/"+(date.getDate()+i+1)+"/"+date.getFullYear();
+                            var forecastDate = $("<h5 class='card-title'>").text(value);
+
+                        cardBody.append(forecastDate);
+                        var getCurrentWeatherIcon = fiveDayData.list[i].weather[0].icon;
+                        console.log(getCurrentWeatherIcon);
+                        var displayWeatherIcon = $("<img src = http://openweathermap.org/img/wn/" + getCurrentWeatherIcon + ".png />");
+                        cardBody.append(displayWeatherIcon);
+                        var getTemp = fiveDayData.list[i].main.temp;
+                        var tempEl = $("<p class = 'card-text'>").text("humidity: "+getTemp+"° F");
+                        cardBody.append(tempEl);
+                        var getHumidity = fiveDayData.list[i].main.humidity;
+                        var humidityEl = $("<p class='card-text'>").text("Humidity: "+getHumidity+"%");
+                        cardBody.append(humidityEl);
+                        forecastCard.append(cardBody);
+                        cardDeck.append(forecastCard);
+                        }
+
+                        $("#forecastContainer").append(forecastDiv);
+
                     })
                 })
 
